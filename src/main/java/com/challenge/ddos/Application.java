@@ -1,6 +1,6 @@
 package com.challenge.ddos;
 
-import com.talakola.kafka.producer.ShipmentTransitProducer;
+import com.challenge.ddos.sources.ApacheLogFileReader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -8,9 +8,9 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
-        ShipmentTransitProducer producer = ctx.getBean(ShipmentTransitProducer.class);
-        producer.produce();
+        ApacheLogFileReader producer = ctx.getBean(ApacheLogFileReader.class);
+        producer.pubToKafka();
     }
 }
