@@ -1,0 +1,21 @@
+spring:
+  profiles.active: local
+
+---
+spring:
+  profiles: local
+kafka:
+  producer:
+    data:
+      bootstrapServers: localhost:9092
+      ack: 1
+      retriesConfig: 3
+      batchSize: 0
+      lingerms: 2
+      maxInflightConnections: 1
+      topic: apache-log-msg
+      keySerializer: com.apache.kafka.common.serialization.StringSerializer
+      valueSerializer: com.apache.kafka.common.serialization.StringSerializer
+
+
+
