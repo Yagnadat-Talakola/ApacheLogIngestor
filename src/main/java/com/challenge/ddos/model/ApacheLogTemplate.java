@@ -1,14 +1,27 @@
 package com.challenge.ddos.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class ApacheLogTemplate {
 
+    @SerializedName("ip_address")
     private String ipAddress;
+
+    @SerializedName("request")
     private String request;
+
+    @SerializedName("bytes_sent")
     private String bytesSent;
+
+    @SerializedName("browser")
     private String browser;
+
+    @SerializedName("response_status_code")
     private String responseStatusCode;
+
+    @SerializedName("timestamp")
     private String timestamp;
 
     public ApacheLogTemplate(String ipAddress, String request, String bytesSent, String browser, String responseStatusCode, String timestamp) {

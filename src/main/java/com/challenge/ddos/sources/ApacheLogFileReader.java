@@ -2,6 +2,7 @@ package com.challenge.ddos.sources;
 
 import com.challenge.ddos.model.ApacheLogTemplate;
 import com.challenge.ddos.producer.KafkaMessageSender;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,26 +27,26 @@ public class ApacheLogFileReader {
         File f = new File("./apache-access-log.txt");
         BufferedReader in = new BufferedReader(new FileReader(f));
 
-        boolean done = false;
-        while(!done) {
+        while(true) {
             String line = in.readLine();
             if (line == null) {
                 logger.error("reached end of file");
                 try { Thread.sleep(LOOP_DELAY); }
                 catch (InterruptedException e) { System.out.println(e); };
             } else {
-                // Process the line.
                 logger.debug(line);
                 // process each message
-                //processMsg(line);
-                sender.send(line);
+                String json = processMsg(line);
+                sender.send(json);
             }
         }
     }
 
-    public ApacheLogTemplate processMsg(String message) {
+    public String processMsg(String message) {
         // parse the message for ipAddress, timestamp, statusCode and path.
-        return regExp.parseLogMsg(message);
+        Gson gson = new Gson();
+        ApacheLogTemplate obj = regExp.parseLogMsg(message);
+        return gson.toJson(obj);
 
     }
 }

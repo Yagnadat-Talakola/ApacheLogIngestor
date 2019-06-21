@@ -1,10 +1,12 @@
 package com.challenge.ddos.sources;
 
 import com.challenge.ddos.model.ApacheLogTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class LogRegExp implements LogInterface {
 
     public ApacheLogTemplate parseLogMsg(String logEntry) {

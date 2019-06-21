@@ -8,9 +8,13 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
-        ApacheLogFileReader producer = ctx.getBean(ApacheLogFileReader.class);
-        producer.pubToKafka();
+        try {
+            ApacheLogFileReader producer = ctx.getBean(ApacheLogFileReader.class);
+            producer.pubToKafka();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

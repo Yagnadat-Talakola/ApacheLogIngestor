@@ -7,14 +7,11 @@ apply plugin: 'groovy'
 group = 'bbejeck'
 version = '1.0-SNAPSHOT'
 
-description = """"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+mainClassName = 'com.challenge.ddos.Application'
 
-jar {
-    archiveName='bbejeck-kafka-streams-1.0-SNAPSHOT.jar'
-}
 
 repositories {
     mavenCentral()
