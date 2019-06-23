@@ -1,4 +1,4 @@
-package com.challenge.ddos.sources;
+package com.challenge.ddos.model;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;

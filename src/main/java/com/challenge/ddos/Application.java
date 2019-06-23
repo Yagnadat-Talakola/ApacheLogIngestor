@@ -1,6 +1,6 @@
 package com.challenge.ddos;
 
-import com.challenge.ddos.sources.ApacheLogFileReader;
+import com.challenge.ddos.sources.ApacheLogFileConsumer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -10,8 +10,8 @@ public class Application {
 
     public static void main(String[] args) throws Exception {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
-        ApacheLogFileReader producer = ctx.getBean(ApacheLogFileReader.class);
-        producer.pubToKafka();
+        ApacheLogFileConsumer producer = ctx.getBean(ApacheLogFileConsumer.class);
+        producer.processMessages();
     }
 
 }
