@@ -1,6 +1,8 @@
 spring:
   profiles.active: local
 
+server:
+  port: 8081
 ---
 spring:
   profiles: local
@@ -16,6 +18,3 @@ kafka:
       topic: apache-log-msg
       keySerializer: com.apache.kafka.common.serialization.StringSerializer
       valueSerializer: com.apache.kafka.common.serialization.StringSerializer
-
-
-

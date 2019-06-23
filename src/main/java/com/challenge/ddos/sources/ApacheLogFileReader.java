@@ -3,12 +3,14 @@ package com.challenge.ddos.sources;
 import com.challenge.ddos.model.ApacheLogTemplate;
 import com.challenge.ddos.producer.KafkaMessageSender;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.time.LocalDateTime;
 
 @Component
 public class ApacheLogFileReader {
@@ -22,13 +24,14 @@ public class ApacheLogFileReader {
     private static final Logger logger = LoggerFactory.getLogger(ApacheLogFileReader.class);
     public int LOOP_DELAY = 1000;
 
-    public void pubToKafka() throws FileNotFoundException, IOException {
+    public void pubToKafka() throws IOException {
+
         logger.info("inside pubToKafka function");
-        File f = new File("./apache-access-log.txt");
-        BufferedReader in = new BufferedReader(new FileReader(f));
+        BufferedReader in = new BufferedReader(new FileReader("./logs"));
+        String line;
 
         while(true) {
-            String line = in.readLine();
+            line = in.readLine();
             if (line == null) {
                 logger.error("reached end of file");
                 try { Thread.sleep(LOOP_DELAY); }
@@ -44,9 +47,8 @@ public class ApacheLogFileReader {
 
     public String processMsg(String message) {
         // parse the message for ipAddress, timestamp, statusCode and path.
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeJsonConverter()).create();
         ApacheLogTemplate obj = regExp.parseLogMsg(message);
         return gson.toJson(obj);
-
     }
 }
