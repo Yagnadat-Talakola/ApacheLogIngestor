@@ -31,6 +31,14 @@
    
 ```
 
+* Environment 
+```
+   docker-compose.yml:
+   1. Kafka container 
+   2. Zookeeper container 
+ 
+```
+
 ### An approach to tackle a Distributed Denial of Service (DDoS) attack
 
 **Concepts**:
