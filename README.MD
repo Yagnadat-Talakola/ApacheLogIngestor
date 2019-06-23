@@ -1,3 +1,19 @@
+### Apache Log File Ingestor ###
+* Apache Log File Format:
+``` 194.70.52.190 - - [25/May/2015:23:11:52 +0000] "GET / HTTP/1.0" 200 3557 "-" "Opera/9.00 (Windows NT 5.1; U; en)"```
+* Kafka Message Format: 
+```
+{
+    "ip_address":"10.90.80.1111",
+    "request":"GET / HTTP/1.0",
+    "bytes_sent":"3557",
+    "browser":"Mozilla/3.01 (compatible;)",
+    "response_status_code":"503",
+    "timestamp":"25/May/2015:23:11:50"
+}
+```
+
+
 ### An approach to tackle a Distributed Denial of Service (DDoS) attack
 
 **Concepts**:
