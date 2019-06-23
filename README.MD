@@ -1,8 +1,10 @@
 ### Apache Log File Ingestor ###
-* Apache Log File Format:
-``` 194.70.52.190 - - [25/May/2015:23:11:52 +0000] "GET / HTTP/1.0" 200 3557 "-" "Opera/9.00 (Windows NT 5.1; U; en)"```
-* Kafka Message Format: 
+* Apache Log File -> Kafka Message Format
+
 ```
+194.70.52.190 - - [25/May/2015:23:11:52 +0000] "GET / HTTP/1.0" 200 3557 "-" "Opera/9.00 (Windows NT 5.1; U; en)"
+
+
 {
     "ip_address":"10.90.80.1111",
     "request":"GET / HTTP/1.0",
