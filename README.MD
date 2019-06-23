@@ -1,3 +1,36 @@
+### Apache Log File Ingestor ###
+* Apache Log File Entry -> Kafka Message JSON Format
+
+```
+194.70.52.190 - - [25/May/2015:23:11:52 +0000] "GET / HTTP/1.0" 200 3557 "-" "Opera/9.00 (Windows NT 5.1; U; en)"
+
+
+{
+    "ip_address":"194.70.52.190",
+    "request":"GET / HTTP/1.0",
+    "bytes_sent":"3557",
+    "browser":"Opera/9.00 (Windows NT 5.1; U; en)",
+    "response_status_code":"200",
+    "timestamp":"25/May/2015:23:11:52"
+}
+```
+
+* Sample Data Generation
+```
+    cd sample-data
+    ./log_entries_gen.sh ipAddress timeStamp statusCode repeatNum
+    
+    The above script will create log entries in Apache log format with the given IP Address, statusCode, timestamp.  You can also repeat the log entries in the file using last param.
+    
+    Example:
+    ./log_entries_gen.sh 10.90.80.100 '25\/May\/2015:23:11:53' 200 1000
+
+    Normal Traffic pattern:  cd sample-data/usecase1 
+    DDOS Traffic pattern: cd sample-data/usecase2
+    Normal + DDOS Traffic pattern: cd sample-data/usecase3
+   
+```
+
 ### An approach to tackle a Distributed Denial of Service (DDoS) attack
 
 **Concepts**:
