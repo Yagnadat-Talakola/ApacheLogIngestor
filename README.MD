@@ -18,7 +18,9 @@
 * Sample Data Generation
 ```
     cd sample-data
-    ./log_entries_gen.sh ipAddress timeStamp statusCode numberOfEntries
+    ./log_entries_gen.sh ipAddress timeStamp statusCode repeatNum
+    
+    The above script will create log entries in Apache log format with the given IP Address, statusCode, timestamp.  You can also repeat the log entries in the file using last param.
     
     Example:
     ./log_entries_gen.sh 10.90.80.100 '25\/May\/2015:23:11:53' 200 1000
