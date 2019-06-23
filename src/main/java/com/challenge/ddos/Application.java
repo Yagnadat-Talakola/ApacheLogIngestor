@@ -8,10 +8,14 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        ApplicationContext ctx = SpringApplication.run(Application.class, args);
-        ApacheLogFileConsumer producer = ctx.getBean(ApacheLogFileConsumer.class);
-        producer.processMessages();
+    public static void main(String[] args) {
+        try {
+            ApplicationContext ctx = SpringApplication.run(Application.class, args);
+            ApacheLogFileConsumer producer = ctx.getBean(ApacheLogFileConsumer.class);
+            producer.processMessages();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

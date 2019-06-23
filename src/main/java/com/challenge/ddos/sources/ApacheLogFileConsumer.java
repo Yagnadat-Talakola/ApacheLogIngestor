@@ -37,16 +37,14 @@ public class ApacheLogFileConsumer {
                 logger.error("reached end of file");
                 Thread.sleep(LOOP_DELAY);
             } else {
-                String jsonFormatLogEntry = parseMessage(logLine);
-                sender.send(jsonFormatLogEntry);
+                ApacheLogEntry entry = parseMessage(logLine);
+                sender.send(entry);
             }
         }
     }
 
-    public String parseMessage(String message) {
+    public ApacheLogEntry parseMessage(String message) {
         // parse the message for ipAddress, timestamp, statusCode and path.
-        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeJsonConverter()).create();
-        ApacheLogEntry obj = parser.parse(message);
-        return gson.toJson(obj);
+        return parser.parse(message);
     }
 }

@@ -6,3 +6,5 @@ gradlew.bat
 /.idea
 /build/
 /build/classes/java/main/
+./sample-data/*/logs
+
