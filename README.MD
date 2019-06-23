@@ -1,5 +1,5 @@
 ### Apache Log File Ingestor ###
-* Apache Log File -> Kafka Message Format
+* Apache Log File Entry -> Kafka Message JSON Format
 
 ```
 194.70.52.190 - - [25/May/2015:23:11:52 +0000] "GET / HTTP/1.0" 200 3557 "-" "Opera/9.00 (Windows NT 5.1; U; en)"
@@ -15,6 +15,15 @@
 }
 ```
 
+* Sample Data Generation
+```
+    cd sample-data
+    ./log_entries_gen.sh ipAddress timeStamp statusCode numberOfEntries
+    
+    Example:
+    ./log_entries_gen.sh 10.90.80.100 '25\/May\/2015:23:11:53' 200 1000
+
+```
 
 ### An approach to tackle a Distributed Denial of Service (DDoS) attack
 
