@@ -23,11 +23,12 @@ public class ApacheLogFileConsumer {
     private ApacheLogParserImpl parser;
 
     private static final Logger logger = LoggerFactory.getLogger(ApacheLogFileConsumer.class);
-    private int LOOP_DELAY = 1000;
+    private static final String LOG_FILE_SOURCE = "./sample-data/usecase2/logs";
+    private static int LOOP_DELAY = 1000;
 
     public void processMessages() throws InterruptedException, IOException {
 
-        BufferedReader in = new BufferedReader(new FileReader("./logs"));
+        BufferedReader in = new BufferedReader(new FileReader(LOG_FILE_SOURCE));
         String logLine;
 
         while (true) {
