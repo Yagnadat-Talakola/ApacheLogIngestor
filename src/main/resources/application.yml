@@ -1,8 +1,8 @@
 spring:
   profiles.active: local
 
-server:
-  port: 8081
+server.port: 8081
+source.file.name: ./sample-data/usecase2/logs
 
 ---
 spring:
@@ -17,5 +17,4 @@ kafka:
       lingerms: 2
       maxInflightConnections: 1
       topic: apache-log-msg
-      keySerializer: com.apache.kafka.common.serialization.StringSerializer
-      valueSerializer: com.apache.kafka.common.serialization.StringSerializer
+      bufferMemory: 241452

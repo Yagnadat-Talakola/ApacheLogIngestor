@@ -1,17 +1,14 @@
 package com.challenge.ddos.sources;
 
 import com.challenge.ddos.model.ApacheLogEntry;
-import com.challenge.ddos.model.LocalDateTimeJsonConverter;
 import com.challenge.ddos.producer.KafkaMessageSender;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.time.LocalDateTime;
 
 @Component
 public class ApacheLogFileConsumer {
@@ -22,19 +19,22 @@ public class ApacheLogFileConsumer {
     @Autowired
     private ApacheLogParserImpl parser;
 
+    @Value("${source.file.name}")
+    private String sourceFile;
+
     private static final Logger logger = LoggerFactory.getLogger(ApacheLogFileConsumer.class);
-    private static final String LOG_FILE_SOURCE = "./sample-data/usecase2/logs";
-    private static int LOOP_DELAY = 1000;
+    private static int LOOP_DELAY = 5000;
 
-    public void processMessages() throws InterruptedException, IOException {
+    public void processMessages() throws Exception {
 
-        BufferedReader in = new BufferedReader(new FileReader(LOG_FILE_SOURCE));
+        logger.info("reading from file {}", sourceFile);
+        BufferedReader in = new BufferedReader(new FileReader(sourceFile));
         String logLine;
 
         while (true) {
             logLine = in.readLine();
             if (logLine == null) {
-                logger.error("reached end of file");
+                logger.info("reached end of file - waiting for more logs");
                 Thread.sleep(LOOP_DELAY);
             } else {
                 ApacheLogEntry entry = parseMessage(logLine);
@@ -44,7 +44,7 @@ public class ApacheLogFileConsumer {
     }
 
     public ApacheLogEntry parseMessage(String message) {
-        // parse the message for ipAddress, timestamp, statusCode and path.
+        // parse the message for ipAddress, timestamp, statusCode and request details.
         return parser.parse(message);
     }
 }

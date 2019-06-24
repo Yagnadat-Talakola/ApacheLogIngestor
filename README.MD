@@ -1,10 +1,11 @@
 ### Apache Log File Ingestor ###
-* Apache Log File Entry -> Kafka Message JSON Format
+* Convert apache log file entry to JSON format before publishing to Kafka
 
 ```
+Example:
 194.70.52.190 - - [25/May/2015:23:11:52 +0000] "GET / HTTP/1.0" 200 3557 "-" "Opera/9.00 (Windows NT 5.1; U; en)"
 
-
+After parsing, extract the required fields to JSON format.
 {
     "ip_address":"194.70.52.190",
     "request":"GET / HTTP/1.0",
@@ -34,8 +35,11 @@
 * Environment 
 ```
    docker-compose.yml:
-   1. Kafka container 
-   2. Zookeeper container 
+   1. Kafka container - running on port 9092
+   2. Zookeeper container - running on port 2181
+
+   docker-compose up 
+   docker-compose down
  
 ```
 
@@ -65,20 +69,6 @@ In the Open Systems Interconnection(OSI) model, the most common attack targets i
 * *filtering traffic*: identify illegitimate requests which could have characteristics like disguising as good traffic or coming from *bad IPs*, unexpected geographies etc. Blocking this even before it reaches the server.
 
 * Monitoring visitor behavior, blocking known bots, challenging suspicious behavior or unrecognized entities with JS test, Cookie challenge and even CAPTCHAs
-
-
->Problem Context:
->Attacked by botnet. Need a real-time detector for DDoS attacks.
-
-#### Business Rules:
-0. Ingest from a Apache log file.
-0. Reading messages from messaging system. (Kafka)
-1. Should be detected within 1 to 2 minutes after application starting.
-2. IP address should be returned to results directory.
-3. Present the solution and approach taken.
-
-> To Answer:
-1. How to scale up in a distributed environment?
 
 **References**
 1. https://aws.amazon.com/shield/ddos-attack-protection/

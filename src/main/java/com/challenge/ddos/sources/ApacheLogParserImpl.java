@@ -1,8 +1,6 @@
 package com.challenge.ddos.sources;
 
 import com.challenge.ddos.model.ApacheLogEntry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -13,6 +11,7 @@ import java.util.regex.Pattern;
 public class ApacheLogParserImpl implements LogParser {
 
     private static final String logEntryPattern = "^([\\d.]+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(.+?)\" (\\d{3}) (\\d+) \"([^\"]+)\" \"([^\"]+)\"";
+    private static final String SPACE = " ";
 
     @Override
     public ApacheLogEntry parse(String logEntry) {
@@ -28,7 +27,7 @@ public class ApacheLogParserImpl implements LogParser {
                 matcher.group(7),
                 matcher.group(9),
                 matcher.group(6),
-                LocalDateTime.parse(matcher.group(4).split(" ")[0], dateTimeFormatter));
+                LocalDateTime.parse(matcher.group(4).split(SPACE)[0], dateTimeFormatter));
     }
 
 }

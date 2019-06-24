@@ -108,4 +108,5 @@ public class KafkaProducerConfig {
                 ", maxInflightConnections='" + maxInflightConnections + '\'' +
                 '}';
     }
+
 }
