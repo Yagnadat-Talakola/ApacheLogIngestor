@@ -39,7 +39,7 @@ public class KafkaMessageSender {
         //send messages asynchronously + callback (much faster than sync)
         producer.send(record, (metadata, ex) -> {
            if(metadata != null) {
-               logger.info("Successfully sent message to meta(partition={}, offset={})", metadata.offset(), metadata.partition());
+               logger.info("Successfully sent message to meta(partition={}, offset={})", metadata.partition(), metadata.offset());
            } else {
                logger.error("Error sending messages {}", record);
            }
