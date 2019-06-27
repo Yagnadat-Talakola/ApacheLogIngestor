@@ -2,7 +2,7 @@ spring:
   profiles.active: local
 
 server.port: 8081
-source.file.name: ./sample-data/usecase2/logs
+source.file.name: ./apache-access-log.txt
 
 ---
 spring:
@@ -13,8 +13,8 @@ kafka:
       bootstrapServers: localhost:9092
       ack: 1
       retriesConfig: 3
-      batchSize: 0
+      batchSize: 1000
       lingerms: 2
       maxInflightConnections: 1
       topic: apache-log-msg
-      bufferMemory: 241452
+      bufferMemory: 20000
